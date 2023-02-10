@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="1.0"
+           elementFormDefault="qualified"
+           targetNamespace="http://fsrar.ru/WEGAIS/WB_DOC_SINGLE_01"
+           xmlns:fq="http://fsrar.ru/WEGAIS/QueryFilter"
+           xmlns:ns="http://fsrar.ru/WEGAIS/WB_DOC_SINGLE_01" xmlns:fr="http://fsrar.ru/WEGAIS/ReplyFilter"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:import namespace="http://fsrar.ru/WEGAIS/QueryFilter" schemaLocation="QueryFilter.xsd"/>
+    <xs:import namespace="http://fsrar.ru/WEGAIS/ReplyFilter" schemaLocation="ReplyFilter.xsd"/>
+
+    <xs:element name="Documents">
+        <xs:annotation>
+            <xs:documentation>Документы от организации</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Owner" type="ns:SenderInfo">
+                    <xs:annotation>
+                        <xs:documentation>Организация, которая предоставляет документы</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="1" name="Document" nillable="0" type="ns:DocBody">
+                    <xs:annotation>
+                        <xs:documentation>Документ</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute default="1.0" name="Version" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="DocBody">
+        <xs:choice id="name" maxOccurs="1" minOccurs="1">
+            <xs:element maxOccurs="1" minOccurs="1" name="QueryFilter" type="fq:QueryFilter"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="ReplyFilter" type="fr:ReplyFilter"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="SenderInfo">
+        <xs:annotation>
+            <xs:documentation>Информация об отправителе</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element minOccurs="1" name="FSRAR_ID" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор по базе ФСРАР</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+</xs:schema>

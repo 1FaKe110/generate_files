@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="1.0"
+           targetNamespace="http://fsrar.ru/WEGAIS/QueryFilter"
+
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+>
+    <xs:complexType name="QueryFilter">
+        <xs:annotation>
+            <xs:documentation>Проверка остатков по фильтру</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="bc" type="xs:string" maxOccurs="10000">
+                <xs:annotation>
+                    <xs:documentation>Штриховой код</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

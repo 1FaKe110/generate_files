@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ns="http://fsrar.ru/WEGAIS/Common"
+           targetNamespace="http://fsrar.ru/WEGAIS/Common"
+
+>
+  <xs:simpleType name="DateWTime">
+    <xs:annotation>
+      <xs:documentation>Дата со временем</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:dateTime">
+      <xs:pattern value="((000[1-9])|(00[1-9][0-9])|(0[1-9][0-9]{2})|([1-9][0-9]{3}))-((0[1-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01]))T(([01][0-9])|(2[0-3]))(:[0-5][0-9]){2}(\.[0-9]+)?" />
+      <xs:maxInclusive value="2100-12-31T23:59:59.997" />
+      <xs:minInclusive value="2000-01-01T00:00:00.000" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DateNoTime">
+    <xs:annotation>
+      <xs:documentation>Дата без времени</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:date">
+      <xs:pattern value="((000[1-9])|(00[1-9][0-9])|(0[1-9][0-9]{2})|([1-9][0-9]{3}))-((0[1-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01]))" />
+      <xs:maxInclusive value="2100-12-31" />
+      <xs:minInclusive value="1900-01-01" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="NoEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoEmptyString50">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="50"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoEmptyString20">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="20"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoEmptyString2000">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="2000"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BrandString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="255"/>
+     <!-- <xs:pattern value="[\u0410-\u042F\u0020\u002D]+"/> -->
+      <xs:pattern value="[А-Я0-9 -]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="packageTypeString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="5" fixed="true"/>
+      <xs:maxLength value="5"/>
+      <xs:pattern value="[0-9]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MarkGZTypeString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="3" fixed="true"/>
+      <xs:maxLength value="3"/>
+      <xs:pattern value="[0-9]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CodeSampleTypeString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="6" fixed="true"/>
+      <xs:maxLength value="6"/>
+      <xs:pattern value="[0-9]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="boxNumberTypeString">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{26}|[0-9]{18}"/>
+    </xs:restriction>
+    
+  </xs:simpleType>
+  <xs:simpleType name="IdentityType">
+    <xs:restriction base="ns:NoEmptyString">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoEmptyString255">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="255"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoEmptyString100">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="100"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoEmptyString500">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="500"/>
+      <xs:pattern value="\S+(.*\S+)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!--  
+  <xs:simpleType name="PDF417String">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+      <xs:pattern value="[A-Za-z0-9]+" />
+    </xs:restriction>
+  </xs:simpleType>
+-->
+
+  <xs:simpleType name="PDF417String">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+      <xs:pattern value="([1-9]\d{2}|\d([1-9]\d|\d[1-9])){2}([1-9]\d{7}|\d([1-9]\d{6}|\d([1-9]\d{5}|\d([1-9]\d{4}|\d([1-9]\d{3}|\d([1-9]\d{2}|\d([1-9]\d|\d[1-9])))))))(0[1-9]|1[0-2])(1[8-9]|[2-9][0-9])([1-9]\d{2}|\d([1-9]\d|\d[1-9]))[0-9A-Z]{129}|\d\d[a-zA-Z0-9]{21}\d[0-1]\d[0-3]\d{10}[a-zA-Z0-9]{31}|[0-9]{40}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BeerCode">
+    <xs:annotation>
+      <xs:documentation>Код datamatrix для пива и слабоалкогольных напитков по ПП № 204 от 17.02.2021</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="31"/>
+      <xs:pattern value="010[0-9]{13}21\S{13}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Barmix">
+    <xs:annotation>
+      <xs:documentation>Смесь штрихкодов пива и штрихкодов АП</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="150"/>
+      <xs:pattern value="([1-9]\d{2}|\d([1-9]\d|\d[1-9])){2}([1-9]\d{7}|\d([1-9]\d{6}|\d([1-9]\d{5}|\d([1-9]\d{4}|\d([1-9]\d{3}|\d([1-9]\d{2}|\d([1-9]\d|\d[1-9])))))))(0[1-9]|1[0-2])(1[8-9]|[2-9][0-9])([1-9]\d{2}|\d([1-9]\d|\d[1-9]))[0-9A-Z]{129}|\d\d[a-zA-Z0-9]{21}\d[0-1]\d[0-3]\d{10}[a-zA-Z0-9]{31}|[0-9]{40}|010[0-9]{13}21\S{13}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FSRARIDType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+      <xs:pattern value="[0-9]+" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="PositiveDecimalType">
+    <xs:restriction base="xs:decimal">
+      <xs:minExclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoNegativeIntegerType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NoNegativeDecimalType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AlcPercentType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MonthType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="YearType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EANType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d{8}|\d{13}|\d{12}|\d{14})" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="OGRNType">
+    <xs:annotation>
+      <xs:documentation>ОГРН</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d{13}|\d{15})" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StringOfNumbers1Type">
+    <xs:annotation>
+      <xs:documentation>строка из 1 цифры</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{1}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StringOfNumbers20Type">
+    <xs:annotation>
+      <xs:documentation>строка из 20 цифр</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{20}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StringOfNumbers11Type">
+    <xs:annotation>
+      <xs:documentation>строка из 11 цифр</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{11}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StringOfNumbers10Type">
+    <xs:annotation>
+      <xs:documentation>строка из 10 цифр</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{10}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

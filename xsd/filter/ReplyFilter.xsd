@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="1.0"
+           xmlns:ns="http://fsrar.ru/WEGAIS/ReplyFilter"
+           targetNamespace="http://fsrar.ru/WEGAIS/ReplyFilter"
+
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+
+>
+    <xs:complexType name="ReplyFilter">
+        <xs:annotation>
+            <xs:documentation>Ответ на запрос проверки остатков по фильтру</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="result" type="ns:ResultType">
+                <xs:annotation>
+                    <xs:documentation>Результат обработки запроса</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="bc" type="xs:string" minOccurs="0" maxOccurs="10000">
+                <xs:annotation>
+                    <xs:documentation>
+                        Штриховые коды, не прошедшие проверку. При этом в result указать "Штрихкод не найден"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ResultType">
+        <xs:annotation>
+            <xs:documentation>Варианты ответов на запрос</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Проверка пройдена"/>
+            <xs:enumeration value="Штрихкод не найден"/>
+            <xs:enumeration value="Отсутствует фильтр"/>
+            <xs:enumeration value="Ошибка не определена"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

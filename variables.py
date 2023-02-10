@@ -1,6 +1,13 @@
 import generate
+import send
 
-documents = {
+generate_documents = {
     'wbgz': generate.wbgz,
-    'marks': generate.marks
+    'marks': generate.marks,
+    'cheque': generate.cheque,
+    'rppv4': generate.rpp4,
+    'chequev3': generate.chequev3,
+}
+send_documents = {
+    'wbgz': send.wbgz
 }
